@@ -107,7 +107,7 @@ elmat %>%
 prj<-"+proj=utm +zone=40 +south +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs"
 
 path<-list.files("C:/Users/God/Downloads",pattern="Randopitons",full=TRUE)
-path<-path[grep("Littoral",path)]
+path<-path[grep("Decotte",path)]
 path<-lapply(path,function(i){
   lay<-st_layers(i)
   st_read(i,layer=lay$name[2])
@@ -139,8 +139,8 @@ if(length(l)>1){
 }
 crs(ras)<-prj
 
-te<-terrain(ras,v="slope",neighbors=8)
-te[te<45]<-NA
+te<-terrain(ras,v="slope",neighbors=4)
+te[te<55]<-NA
 p<-as.polygons(te)
 p<-st_as_sf(p)
 p<-st_as_sf(st_union(p))
